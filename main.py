@@ -1,16 +1,21 @@
-# This is a sample Python script.
+#Main.py
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import ecommerce as ECOMM
+
+ECOMM.homepage()
+choice = ECOMM.type_handling()
+
+if choice == 1:
+    #category_choice = ECOMM.category_choice
+
+    item_choice, category_choice = ECOMM.show_items_for_sale()
+    item_choice_list = ECOMM.item_choice_handling(item_choice)
+
+    print(type(item_choice_list))
+    cart = {} #store the name + cost
+
+    chosen_dict = ECOMM.category_dictionaries[category_choice-1]
+
+    cart = ECOMM.adding_item_to_cart(cart, item_choice_list, chosen_dict)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
