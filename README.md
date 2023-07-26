@@ -20,3 +20,7 @@ Project development
 9. Bill statement: Total price before discount & GST, Discount, GST after discount, Total Payable. Alignment & Clarity to viewers.  
 10. Accuracy of calculations. Total price before discount & GST, Discount, GST after discount, Total Payable.
 """
+
+things to work on: 
+
+1. need to do error handling when space is added when want to add items to cart. 
