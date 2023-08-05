@@ -1,7 +1,7 @@
 import re
 import datetime
 
-
+print("hi")
 def get_time_of_day_greeting():
     current_hour = datetime.datetime.now()
     print("Good morning! Current Date and Time: ")
