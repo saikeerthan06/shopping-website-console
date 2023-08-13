@@ -5,7 +5,7 @@ import Group2_EGC151_C6_sign_up as SU
 
 def get_time_of_day_greeting():
     current_hour = datetime.datetime.now()
-    return current_hour.strftime("Greetings! Current Date and Time: %B %d, %Y %H:%M:%S")
+    return current_hour.strftime("\nGreetings! Current Date and Time: %B %d, %Y %H:%M:%S")
 
 def welcome_page():
     print("\n====== WELCOME TO GUNDAM STORE! ======")
@@ -119,6 +119,11 @@ def show_items_for_sale():
                 print(f"{counter_M}. {key}\t ${val}")
             counter_M += 1
 
+    else:
+        print("ERROR: Invalid Input, Please enter valid category choice.")
+        return show_items_for_sale()
+
+
     item_choice = input("Please Select the item Number(s)(separated by commas): ")
 
     selected_products = []  # empty list, nothing is added yet.
@@ -142,7 +147,7 @@ def adding_item_to_cart(cart, item_choice_list, chosen_dict):
 
 def display_cart(cart):
 
-    print("Name\t\t          |\t Cost\t\t          |\t Quantity")
+    print("Name\t\t          |\tCost\t|\t Quantity")
     print("------------------------------------------------------------")
 
     if len(cart) != 0:
@@ -151,7 +156,7 @@ def display_cart(cart):
             if (key == "Full Saber") or (key == "Ganesa") or (key == "Wing Gundam") or (key == "RG GoldyMarg") or (key == "God Gundam") or (key == "Little Ryan") or (key == "Cannon Bull"):
                 print(f"{counter}. {key}\t\t\t {value[0]}\t\t {value[1]}")
             else:
-                print(f"{counter}. {key}\t\t {value[0]}\t {value[1]}")
+                print(f"{counter}. {key}\t\t {value[0]}\t\t {value[1]}")
             counter += 1
     else:
         print("Cart is Empty! Please add in items to Purchase!")
@@ -190,13 +195,19 @@ def calculate_total_amount(cart, membership_type):
     #define membership type and corresponding discount
     if membership_type == 'gold':
         discount = 0.15
+        d_discount = 15
     elif membership_type == 'silver':
         discount= 0.10
+        d_discount = 10
     elif membership_type == 'bronze':
         discount = 0.05
+        d_discount = 5
     elif membership_type == "nil":
         discount = 1
+        d_discount = 0
 
+    #trying to display amount of discount:
+    discount_type = d_discount * 100
     #constant - therefore variable name in Capslock
     GST = 0.08
 
@@ -220,7 +231,7 @@ def calculate_total_amount(cart, membership_type):
     #final price after GST
     final_price = discounted_price + (GST * discounted_price)
 
-    return total_sum, discounted_amount, discounted_price, final_price
+    return total_sum, discounted_amount, discounted_price, final_price, discount_type
 
 
 

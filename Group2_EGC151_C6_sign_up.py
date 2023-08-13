@@ -1,6 +1,6 @@
 #SIGNING UP
 
-import re
+import re, sys
 import datetime
 import Group2_EGC151_C6_sending_SMS as SS
 import Group2_EGC151_C6_logic as GS
@@ -52,7 +52,8 @@ def sign_up_for_membership():
     while True:
         phone_number = input("Enter your phone number (or 'q' to quit): ")
         if phone_number.lower() == 'q':
-            return False
+            print("Thank you for visiting Gundam Store! See you again Soon!")
+            sys.exit(1)  #to force exit
         if is_valid_phone_number(phone_number):
             new_user['phone_num'] = phone_number
             break
@@ -60,10 +61,11 @@ def sign_up_for_membership():
 
     email = input("Enter your email (or 'q' to quit): ")
     if email.lower() == 'q':
-        return False
+        print("Thank you for visiting Gundam Store! See you again Soon!")
+        sys.exit(1)
     while not is_valid_email(email):
         print("Invalid email format. Please enter a valid email address.")
-        email = input("Enter your email (e.g., example@example.com, or 'q' to quit): ")
+        email = input("Enter your email (e.g., example@example.com): ")
         if email.lower() == 'q':
             return False
     else:
@@ -82,7 +84,7 @@ def sign_up_for_membership():
             print("Invalid age. Please enter a valid number.")
 
     while True:
-        birthdate = input("Enter your birthdate (YYYY-MM-DD, or 'q' to quit): ")
+        birthdate = input("Enter your birthdate (YYYY-MM-DD): ")
         if birthdate.lower() == 'q':
             new_user["birthdate"] = birthdate
             return False
@@ -156,7 +158,7 @@ def sign_up_for_membership():
     
         if class_ask != "nil":
             print(f"${amt} has been charged to credit card number ending with {credit_card[-4:]}!")
-            print(f"Here is your Membership ID: {memb_id}. Use this in Checkout for a 15% discount!")
+            print(f"Your Membership ID is your CVV Number. Use this in Checkout for a discount!")
             SS.sending_confirmation(amt, credit_card, class_ask)
             print(f"An SMS has already been sent with the details to your number. Thank You for choosing {class_ask} Membership!\n")
 

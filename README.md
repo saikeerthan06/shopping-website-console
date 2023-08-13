@@ -20,7 +20,10 @@ Project development
 9. Bill statement: Total price before discount & GST, Discount, GST after discount, Total Payable. Alignment & Clarity to viewers.  
 10. Accuracy of calculations. Total price before discount & GST, Discount, GST after discount, Total Payable.
 """
+1. Users will be greeted with a mandatory sign up page, where every vital information such as Credit Card, CVV Number, age ,e-mail, name and delivery address and more. All of this information will be stored in a dictionary. 
 
-things to work on: 
+2. Users have the ease of adding items to cart, e.g. 1,2,3,4
+ 
+3. Users will come across another page called the Welcome Page, where they have optons to view their membership details, see items for sale, check their shopping cart where they can remove, change quantity and see the quantity update it in real time. 
 
-1. need to do error handling when space is added when want to add items to cart. 
+

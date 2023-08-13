@@ -80,18 +80,27 @@ while choice < 6:
         while len(CVV_number) != 3:
             CVV_number = input("Invalid Input! Please enter your CVV number correctly to proceed: ")
         else:
-            print("\n============== BILL STATEMENT ==============\n")
+            print("\n================== BILL STATEMENT =======================\n")
             GS.display_cart(cart)
             print("\n")
 
-            total_sum, discounted_amount, discounted_price, final_price = GS.calculate_total_amount(cart, SU.users_info[CVV_number]['membership_type'])
+            total_sum, discounted_amount, discounted_price, final_price, discount_type = GS.calculate_total_amount(cart, SU.users_info[CVV_number]['membership_type'])
 
-            print(f"Total Price before Discount: {total_sum:.2f}")
-            print(f"Discounted Amount: {discounted_amount:.2f}")
-            print(f"Total Price after Discount: {discounted_price:.2f}")
-            print(f"GST Amount (8%): {(0.08 * discounted_price):.2f}\n")
 
-            print(f"Total Amount Payable: {final_price:.2f}\n")
+
+            print(f"Membership Class: {SU.users_info[CVV_number]['membership_type']}")
+            print("\n")
+            print(f"Amount Of Discount: {discount_type}%")
+            print("\n")
+            print(f"Total Price before Discount: ${total_sum:.2f}")
+            print("\n")
+            print(f"Total Price after Discount: ${discounted_price:.2f}")
+            print("\n")
+            print(f"Discounted Amount: ${discounted_amount:.2f}")
+            print("\n")
+            print(f"GST Amount (8%): ${(0.08 * discounted_price):.2f}\n")
+            print("\n")
+            print(f"Total Amount Payable: ${final_price:.2f}\n")
 
           
             system_OTP = SS.sending_OTP()
@@ -102,9 +111,14 @@ while choice < 6:
                 print("Payment Succesful! Items Purchased will be delivered within 3 working days!")
             else:
                 print("Error! Please enter a valid OTP: ")
+            cart.clear()
 
     elif choice == 5:
         print("Thank you for shopping with Gundam Store!")
         break
+    else:
+        print("Invalid option, Please input Valid option")
+        GS.welcome_page()
+        
         
 cart = {} #store the name + cost
