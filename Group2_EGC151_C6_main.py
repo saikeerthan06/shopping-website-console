@@ -69,7 +69,7 @@ while choice < 6:
 
                         if decrease_ask == "yes" or decrease_ask == "y":
                             pdt_id_dec = int(input("Please enter the corresponding number of the Product:"))
-                            pdt_qty_dec = int(input("Please enter the quantity by which you want to decrease: "))
+                            pdt_qty_dec = int(input("Please enter the new quantity of the above Product: "))
                             GS.decrease_quantity(cart, pdt_id_dec, pdt_qty_dec)
                             GS.display_cart(cart)
 

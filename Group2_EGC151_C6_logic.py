@@ -135,23 +135,23 @@ def adding_item_to_cart(cart, item_choice_list, chosen_dict):
     pdt_names = list(chosen_dict.keys())
 
     for element in item_choice_list:
-        cart[pdt_names[int(element) - 1]] = chosen_dict[pdt_names[int(element) - 1]]
+        cart[pdt_names[int(element) - 1]] = [chosen_dict[pdt_names[int(element) - 1]], 1]
 
     return cart
 
 
 def display_cart(cart):
 
-    print("Name\t\t          |\t Cost")
-    print("----------------------------------------")
+    print("Name\t\t          |\t Cost\t\t          |\t Quantity")
+    print("------------------------------------------------------------")
 
     if len(cart) != 0:
         counter = 1
         for key, value in cart.items():
             if (key == "Full Saber") or (key == "Ganesa") or (key == "Wing Gundam") or (key == "RG GoldyMarg") or (key == "God Gundam") or (key == "Little Ryan") or (key == "Cannon Bull"):
-                print(f"{counter}. {key}\t\t\t {value}")
+                print(f"{counter}. {key}\t\t\t {value[0]}\t\t {value[1]}")
             else:
-                print(f"{counter}. {key}\t\t {value}")
+                print(f"{counter}. {key}\t\t {value[0]}\t {value[1]}")
             counter += 1
     else:
         print("Cart is Empty! Please add in items to Purchase!")
@@ -167,7 +167,9 @@ def remove_item_cart(cart, pdt_removal_list):
 
 def increase_quantity(cart, pdt_id, pdt_qty):
     cart_item_names = list(cart.keys())
-    cart[cart_item_names[pdt_id - 1]] = cart[cart_item_names[pdt_id - 1]] * pdt_qty
+
+    cart[cart_item_names[pdt_id - 1]][0] = cart[cart_item_names[pdt_id - 1]][0] * pdt_qty
+    cart[cart_item_names[pdt_id - 1]][1] = pdt_qty
 
 
 def decrease_quantity(cart, pdt_id, pdt_qty):
@@ -175,8 +177,12 @@ def decrease_quantity(cart, pdt_id, pdt_qty):
 
     for category in category_dictionaries:
         if cart_item_names[pdt_id-1] in category:
-            if cart[cart_item_names[pdt_id - 1]] > category[cart_item_names[pdt_id-1]]:
-                cart[cart_item_names[pdt_id - 1]] = cart[cart_item_names[pdt_id - 1]] / (pdt_qty + 1)
+            #if cart[cart_item_names[pdt_id - 1]] > category[cart_item_names[pdt_id-1]]:
+            if cart[cart_item_names[pdt_id - 1]][1] > 2:
+                #changing the price accordingly
+                cart[cart_item_names[pdt_id - 1]][0] = category[cart_item_names[pdt_id-1]] * pdt_qty
+                #changing the quantity accordingly
+                cart[cart_item_names[pdt_id - 1]][1] = pdt_qty
             else:
                 remove_item_cart(cart, str(pdt_id))
 
@@ -195,7 +201,13 @@ def calculate_total_amount(cart, membership_type):
     GST = 0.08
 
     #getting the sum of all the products in the cart
-    total_sum = sum(list(cart.values()))
+    cart_vals = list(cart.values())
+    cart_prices = []  #list of all the prices
+
+    for price, qty in cart_vals:
+        cart_prices.append(price)
+
+    total_sum = sum(cart_prices)
 
     #calculating the discounted amount
     if membership_type != "nil":
